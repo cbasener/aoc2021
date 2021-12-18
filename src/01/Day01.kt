@@ -4,33 +4,11 @@ import readInput
 
 fun main() {
     fun part1(input: List<String>): Int {
-        val intArray = input.map { it.toInt() }.toIntArray()
-
-        var increased = 0
-
-        for (i in 1 until intArray.size) {
-            if (intArray[i] > intArray[i - 1])
-                increased++
-        }
-
-
-        return increased
+        return input.map { it.toInt() }.windowed(2) { it[0] < it[1] }.count { it }
     }
 
     fun part2(input: List<String>): Int {
-        val intArray = input.map { it.toInt() }.toIntArray()
-
-        var increased = 0
-
-        for (i in 0..intArray.size - 4) {
-            val firstSlidingWindow = intArray[i] + intArray[i + 1] + intArray[i + 2]
-            val secondSlidingWindow = intArray[i + 1] + intArray[i + 2] + intArray[i + 3]
-
-            if (secondSlidingWindow > firstSlidingWindow)
-                increased++
-        }
-
-        return increased
+        return input.map { it.toInt() }.windowed(3) { it[0] + it[1] + it[2] }.windowed(2) { it[0] < it[1] }.count { it }
     }
 
     // test if implementation meets criteria from the description, like:
